@@ -75,39 +75,40 @@ var date = moment().format("dddd, MMMM Do, YYYY");
 // display date in currentDay id 
 $("#currentDay").text(date);
 
-// time function
+// defining time and colorBlockZones function
 function colorBlockZones() {
 
-    // I want to obtain the current hour so: I called moment and then extracted the hours and stored them in a variable called "currentHour" which now holds the current hour.
+    // I want to obtain the current hour so: I called moment (https://stackoverflow.com/questions/38981976/moment-get-current-date) and then extracted the hours and stored them in a variable called "currentHour" which now holds the current hour.
     var currentHour = moment().hours();
 
     // function for each class block to ditermine if it's past, present, or future
-    $(".block").each(function () {
+    $(".block").each(function() {
 
-        // variable "hour" holds id hour from class block and pareInt is used to chang it from a string to an integer.
-        var hour = parseInt($(this).attr("id"));
+        // variable "blockHour" holds id hour from class block and parseInt is used to change it from a string to an integer.
+        var blockHour = parseInt($(this).attr("id"));
 
+        // We need to compare the variable blockHour (integer inside) with currentHour.
         // if statement to ditermin if in the past hour's
-        if (hour < currentHour) {
-            // adds grey to blocks
+        if (blockHour < currentHour) {
+            // adds color grey to blocks from "past"
             $(this).addClass("past");
         }
 
-        //else if statement to ditermin if in the present hour
-        else if (hour === currentHour) {
-            // removes grey to blocks
+        //else if statement to ditermine if in the present hour
+        else if (blockHour === currentHour) {
+            // removes color grey from blocks
             $(this).removeClass("past");
-            // adds red to blocks
+            // and adds color red to blocks
             $(this).addClass("present");
         }
 
-        // else statement to ditermin if in the future's
+        // else statement to ditermine if it's in the future (rest of options --> else)
         else {
-            // removes grey to blocks
+            // removes grey from blocks
             $(this).removeClass("past");
-            // removes red to blocks
+            // removes red from blocks
             $(this).removeClass("present");
-            // adds green to blocks
+            // adds green to the blocks
             $(this).addClass("future");
         }
 
@@ -115,7 +116,7 @@ function colorBlockZones() {
 
 };
 
-// call the funtion colorBlockZones()
+// call the funtion colorBlockZones() to be executed to have the color that corresponds to the time.
 colorBlockZones();
 
 
